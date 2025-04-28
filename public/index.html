@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Full Stack App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
-</body>
-<script src="index.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Stack Authentication Site</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- SIGN UP SECTION -->
+    <div>
+      Signup
+      <input type="text" name="username" placeholder="Username" id="signup-username"/>
+      <input type="password" name="password" placeholder="Password" id="signup-password"/>
+      <button onclick="signup()">Submit</button>
+    </div>
+    <!-- SIGN IN SECTION -->
+    <div>
+      Signin
+      <input type="text" name="username" placeholder="Username" id="signin-username"/>
+      <input type="password" name="password" placeholder="Password" id="signin-password"/>
+      <button onclick="signin()">Submit</button>
+    </div>
+    <!-- USER INFORMATION SECTION -->
+    <div>
+      User information:
+      <div id="information"></div>
+    </div>
+    <!-- LOGOUT SECTION -->
+    <div>
+      <button onclick="logout()">Logout</button>
+    </div>
+    <script src="index.js"></script>
+  </body>
 </html>

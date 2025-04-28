@@ -1,15 +1,17 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
+const path = require("path");
+
+// Serve the public folder statically
 
 const JWT_SECRET = "yashx9901";
-
 const app = express();
+app.use(cors({ origin: "http://localhost:3000" }));
 
 const user = [];
 
 app.use(express.json());
-app.use(cors());
 
 function auth(req, res, next) {
   const token = req.headers.token;
@@ -26,6 +28,8 @@ function auth(req, res, next) {
     });
   }
 }
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/signup", function (req, res) {
   const username = req.body.username;
@@ -70,16 +74,19 @@ app.post("/signin", function (req, res) {
   for (let i = 0; i < user.length; i++) {
     if (user[i].username === username && user[i].password === password) {
       foundUser = user[i];
-      res.json({
-        message: "Sign In Successfull",
-        Token: token,
-      });
-      console.log(foundUser);
-    } else {
-      res.json({
-        message: "Invalid Credentials",
-      });
+      break;
     }
+  }
+  if (foundUser) {
+    res.json({
+      message: "Sign In Successfull",
+      Token: token,
+    });
+    console.log(foundUser);
+  } else {
+    res.json({
+      message: "Invalid Credentials",
+    });
   }
 });
 
@@ -89,18 +96,22 @@ app.post("/me", auth, function (req, res) {
   for (let i = 0; i < user.length; i++) {
     if (user[i].username === req.username) {
       foundUser = user[i];
-      res.json({
-        username: foundUser.username,
-        password: foundUser.password,
-      });
-    } else {
-      res.json({
-        message: "Token invalid",
-      });
+      break;
     }
+  }
+
+  if (foundUser) {
+    res.json({
+      username: foundUser.username,
+      password: foundUser.password,
+    });
+  } else {
+    res.json({
+      message: "Token invalid",
+    });
   }
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on "http://localhost:3000/"');
+app.listen(4000, () => {
+  console.log('Server is running on "http://localhost:4000/"');
 });
