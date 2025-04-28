@@ -22,7 +22,6 @@ async function signin() {
     console.log(response.data.Token);
     localStorage.setItem("Token", response.data.Token);
     alert("You are Signed In.");
-    displayInfo();
   } else {
     alert(response.data.message); // Show error message like "Invalid Credentials"
   }
@@ -46,6 +45,8 @@ async function displayInfo() {
   } else {
     alert(response.data.message);
   }
+
+  displayInfo();
 }
 
 function logout() {
